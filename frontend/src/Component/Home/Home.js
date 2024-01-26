@@ -1,6 +1,7 @@
 import CodeMirror from 'codemirror'
 import { useEffect, useState } from 'react'
 import Service from './Service';
+import home from '../../Images/home.avif'
 
 
 
@@ -35,7 +36,7 @@ export default function Home() {
   }}>
         <div className="row">
           <div className="col-lg-4 align-center mt-5 ">
-            <img className='img-fluid rounded-circle border border-5 border-primary ' src='https://images.cointelegraph.com/cdn-cgi/image/format=auto,onerror=redirect,quality=90,width=1434/https://s3.cointelegraph.com/uploads/2023-01/158029af-a86a-402f-a5b5-e915cc69f138.JPG'/>
+            <img className='img-fluid rounded-circle border border-5 border-primary ' src={home}/>
           </div>
           <div className="col-lg-8 mt-5">
             <div className='p-2 border border-2 border-primary'>
