@@ -1,6 +1,14 @@
 import React from 'react'
 import logo from '../../Images/logo.png'
+import { isAuthenticated } from "../../Helpers/index.js";
+import {signout} from "../../Helpers/signout"
+import { useNavigate,Link } from "react-router-dom";
+import Avatar from 'react-avatar';
+
+
 export default function Navbar() {
+
+    const navigate=useNavigate()
   return (
  
         <nav class="navbar navbar-light bg-light fixed-top">
@@ -28,21 +36,27 @@ export default function Navbar() {
                         <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
                             Code Along
                         </h5>
+                        
                         <button
                             type="button"
                             class="btn-close text-reset"
                             data-bs-dismiss="offcanvas"
                             aria-label="Close"
                         ></button>
+                        
                     </div>
                     <div class="offcanvas-body">
+                    {isAuthenticated() &&<h5 class="offcanvas-title border border-primary p-2" id="offcanvasNavbarLabel">
+                    <Avatar className='' name={isAuthenticated().data.user.name} size="40" round={true}/> Welcome,  <b>{isAuthenticated().data.user.name}</b>
+                        </h5>}
+                        <br></br>
                         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
                             <li class="nav-item">
-                                <a
+                                <Link
                                     class="nav-link active"
                                     aria-current="page"
-                                    href="#"
-                                    ><b>Home</b></a
+                                    to="/"
+                                    ><b>Home</b></Link
                                 >
                             </li>
                             <hr/>
@@ -52,9 +66,26 @@ export default function Navbar() {
                             </li>
                            <hr/>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="#"><b>Login / Signup</b></a>
+                           
+                           {isAuthenticated() && <li class="nav-item">
+                                <Link class="nav-link" to="/dashboard"><b>Dashboard</b></Link>
+                                <hr/> </li>}
+
+                          
+
+                            {!isAuthenticated() && <li class="nav-item">
+                                <Link class="nav-link" to="/login"><b>Login / Signup</b></Link>
+                            </li>}
+
+                            {
+                                isAuthenticated() && 
+                                <li class="nav-item">
+                                <a class="nav-link " href="#"><b onClick={e=>{signout();navigate('/')}}>Logout</b></a>
                             </li>
+                            }
+
+
+                            
 
                             {/* <li class="nav-item dropdown">
                                 <a
